@@ -16,7 +16,7 @@ module.exports = async (kernel) => {
       o.run.push({
         "method": "self.set",
         "params": {
-          "app/ui-config.json": {
+          "sd-webui-forge/ui-config.json": {
             "txt2img/Width/value": 1024,
             "txt2img/Height/value": 1024,
           }
@@ -27,21 +27,21 @@ module.exports = async (kernel) => {
       "method": "fs.share",
       "params": {
         "drive": {
-          "checkpoints": "app/models/Stable-diffusion",
-  //          "configs": "app/models/Stable-diffusion",
-          "vae": "app/models/VAE",
+          "checkpoints": "sd-webui-forge/models/Stable-diffusion",
+  //          "configs": "sd-webui-forge/models/Stable-diffusion",
+          "vae": "sd-webui-forge/models/VAE",
           "loras": [
-            "app/models/Lora",
-            "app/models/LyCORIS"
+            "sd-webui-forge/models/Lora",
+            "sd-webui-forge/models/LyCORIS"
           ],
           "upscale_models": [
-            "app/models/ESRGAN",
-            "app/models/RealESRGAN",
-            "app/models/SwinIR"
+            "sd-webui-forge/models/ESRGAN",
+            "sd-webui-forge/models/RealESRGAN",
+            "sd-webui-forge/models/SwinIR"
           ],
-          "embeddings": "app/embeddings",
-          "hypernetworks": "app/models/hypernetworks",
-          "controlnet": "app/models/ControlNet"
+          "embeddings": "sd-webui-forge/embeddings",
+          "hypernetworks": "sd-webui-forge/models/hypernetworks",
+          "controlnet": "sd-webui-forge/models/ControlNet"
         },
         "peers": [
           "https://github.com/cocktailpeanutlabs/comfyui.git",
@@ -54,7 +54,7 @@ module.exports = async (kernel) => {
         "method": "fs.download",
         "params": {
           "uri": "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.safetensors?download=true",
-          "dir": "app/models/Stable-diffusion"
+          "dir": "sd-webui-forge/models/Stable-diffusion"
         }
       })
     } else {
@@ -62,13 +62,13 @@ module.exports = async (kernel) => {
         "method": "fs.download",
         "params": {
           "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
-          "dir": "app/models/Stable-diffusion"
+          "dir": "sd-webui-forge/models/Stable-diffusion"
         }
       }, {
         "method": "fs.download",
         "params": {
           "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors",
-          "dir": "app/models/Stable-diffusion"
+          "dir": "sd-webui-forge/models/Stable-diffusion"
         }
       }])
     }
@@ -79,7 +79,7 @@ module.exports = async (kernel) => {
         "env": {
           "SD_WEBUI_RESTARTING": 1,
         },
-        "path": "app",
+        "path": "sd-webui-forge",
         "on": [{ "event": "/http:\/\/[0-9.:]+/", "kill": true }]
       }
     }, {
