@@ -24,10 +24,10 @@ class Automatic1111 {
       } else {
         defaultArgs += "--skip-torch-cuda-test --upcast-sampling --use-cpu all --no-half --api"
       }
-      let text = await fs.promises.readFile(path.resolve(__dirname, "app", "webui-user.sh"), "utf8")
+      let text = await fs.promises.readFile(path.resolve(__dirname, "sd-webui-forge", "webui-user.sh"), "utf8")
       let re = /^(#?)(export COMMANDLINE_ARGS=)(.+)$/m
       let newtext = text.replace(re, `$2"${defaultArgs}"`)
-      await fs.promises.writeFile(path.resolve(__dirname, "app", "webui-user.sh"), newtext)
+      await fs.promises.writeFile(path.resolve(__dirname, "sd-webui-forge", "webui-user.sh"), newtext)
     } else if (platform === 'win32') {
       let test = vendors.filter((vendor) => {
         return /advanced micro devices/i.test(vendor)
@@ -37,10 +37,10 @@ class Automatic1111 {
       } else {
         defaultArgs += "--xformers --no-half-vae --api"
       }
-      let text = await fs.promises.readFile(path.resolve(__dirname, "app", "webui-user.bat"), "utf8")
+      let text = await fs.promises.readFile(path.resolve(__dirname, "sd-webui-forge", "webui-user.bat"), "utf8")
       let re = /^(set COMMANDLINE_ARGS=)(.*)$/m
       let newtext = text.replace(re, `$1${defaultArgs}`)
-      await fs.promises.writeFile(path.resolve(__dirname, "app", "webui-user.bat"), newtext)
+      await fs.promises.writeFile(path.resolve(__dirname, "sd-webui-forge", "webui-user.bat"), newtext)
     } else {
       // linux
       let test = vendors.filter((vendor) => {
@@ -53,10 +53,10 @@ class Automatic1111 {
       } else {
         defaultArgs += "--xformers --no-half-vae --api"
       }
-      let text = await fs.promises.readFile(path.resolve(__dirname, "app", "webui-user.sh"), "utf8")
+      let text = await fs.promises.readFile(path.resolve(__dirname, "sd-webui-forge", "webui-user.sh"), "utf8")
       let re = /^(#?)(export COMMANDLINE_ARGS=)(.+)$/m
       let newtext = text.replace(re, `$2"${defaultArgs}"`)
-      await fs.promises.writeFile(path.resolve(__dirname, "app", "webui-user.sh"), newtext)
+      await fs.promises.writeFile(path.resolve(__dirname, "sd-webui-forge", "webui-user.sh"), newtext)
     }
   }
 }

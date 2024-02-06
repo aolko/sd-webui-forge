@@ -1,16 +1,20 @@
-const path = require('path')
+const os = require('os')
+const fs = require('fs')
+const path = require("path")
+const exists = (filepath) => {
+  return new Promise(r=>fs.access(filepath, fs.constants.F_OK, e => r(!e)))
+}
 module.exports = {
-  version: 1,
-  title: "Stable Diffusion web UI",
-  description: "One-click launcher for Stable Diffusion web UI (AUTOMATIC1111/stable-diffusion-webui)",
+  title: "SD WebUI Forge",
+  description: "Stable Diffusion UI with patches by lllyasviel",
   icon: "icon.png",
   menu: async (kernel) => {
-    let installed = await kernel.exists(__dirname, "app", "venv")
+    let installed = await kernel.exists(__dirname, "sd-webui-forge", "venv")
     let installing = kernel.running(__dirname, "install.js")
     let configure = {
       icon: "fa-solid fa-gear",
       text: "Configure",
-      href: (kernel.platform === 'win32' ? "app/webui-user.bat?mode=source#L6" : "app/webui-user.sh?mode=source#L13")
+      href: (kernel.platform === 'win32' ? "sd-webui-forge/webui-user.bat?mode=source#L6" : "sd-webui-forge/webui-user.sh?mode=source#L13")
     }
     if (installing) {
       return [{ icon: "fa-solid fa-plug", text: "Installing", href: "install.js" }]
@@ -43,26 +47,6 @@ module.exports = {
           href: "start.js"
         }, configure]
       }
-      arr = arr.concat([{
-        icon: "fa-solid fa-download",
-        text: "Download Models",
-        menu: [
-          { text: "Download by URL", icon: "fa-solid fa-download", href: "download.html?raw=true" },
-          { text: "SDXL", icon: "fa-solid fa-download", href: "download-sdxl.json", mode: "refresh" },
-          { text: "SDXL Turbo", icon: "fa-solid fa-download", href: "download-turbo.json", mode: "refresh" },
-          { text: "Stable Video XT", icon: "fa-solid fa-download", href: "download-svd-xt.json", mode: "refresh" },
-          { text: "Stable Video", icon: "fa-solid fa-download", href: "download-svd.json", mode: "refresh" },
-          { text: "LCM LoRA", icon: "fa-solid fa-download", href: "download-lcm-lora.json", mode: "refresh" },
-          { text: "SD 1.5", icon: "fa-solid fa-download", href: "download-sd15.json", mode: "refresh" },
-          { text: "SD 2.1", icon: "fa-solid fa-download", href: "download-sd21.json", mode: "refresh" },
-        ]
-      }, {
-        icon: "fa-solid fa-rotate", text: "Update", href: "update.json"
-      }, {
-        icon: "fa-solid fa-plug", text: "Reinstall", href: "install.js"
-      }, {
-        icon: "fa-solid fa-broom", text: "Factory Reset", href: "reset.json"
-      }])
       return arr
     } else {
       return [{
