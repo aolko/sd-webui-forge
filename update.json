@@ -8,7 +8,7 @@
     "method": "shell.run",
     "params": {
       "message": "git pull",
-      "path": "app"
+      "path": "sd-webui-forge"
     }
   }]
 }
