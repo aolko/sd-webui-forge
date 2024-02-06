@@ -49,7 +49,7 @@ module.exports = async (kernel) => {
         ]
       }
     })
-    if (kernel.platform === "darwin" && kernel.arch === "x64") {
+    /*if (kernel.platform === "darwin" && kernel.arch === "x64") {
       o.run.push({
         "method": "fs.download",
         "params": {
@@ -71,7 +71,7 @@ module.exports = async (kernel) => {
           "dir": "sd-webui-forge/models/Stable-diffusion"
         }
       }])
-    }
+    }*/
     o.run = o.run.concat([{
       "method": "shell.run",
       "params": {
